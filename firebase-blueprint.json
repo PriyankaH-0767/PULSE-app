@@ -1,0 +1,122 @@
+{
+  "entities": {
+    "Task": {
+      "title": "Task",
+      "description": "A focus directive task",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "deadline": { "type": "string" },
+        "priority": { "type": "string", "enum": ["High", "Medium", "Low"] },
+        "estimatedMinutes": { "type": "integer" },
+        "status": { "type": "string", "enum": ["pending", "done"] },
+        "source": { "type": "string", "enum": ["manual", "text", "voice", "agent"] },
+        "subtasks": { "type": "array" }
+      },
+      "required": ["id", "title", "deadline", "priority", "estimatedMinutes", "status", "source", "subtasks"]
+    },
+    "Habit": {
+      "title": "Habit",
+      "description": "A daily habit track",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "currentStreak": { "type": "integer" },
+        "lastLoggedDate": { "type": "string" }
+      },
+      "required": ["id", "name", "currentStreak"]
+    },
+    "ScheduleBlock": {
+      "title": "ScheduleBlock",
+      "description": "A smart daily schedule block",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timeSlot": { "type": "string" },
+        "taskId": { "type": "string" },
+        "label": { "type": "string" },
+        "note": { "type": "string" }
+      },
+      "required": ["id", "timeSlot", "label", "note"]
+    },
+    "UrgentAlert": {
+      "title": "UrgentAlert",
+      "description": "An urgent alert block",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "taskId": { "type": "string" },
+        "taskTitle": { "type": "string" },
+        "message": { "type": "string" }
+      },
+      "required": ["id", "taskId", "taskTitle", "message"]
+    },
+    "HabitNudge": {
+      "title": "HabitNudge",
+      "description": "A habit reminder nudge",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "habitName": { "type": "string" },
+        "message": { "type": "string" }
+      },
+      "required": ["id", "habitName", "message"]
+    },
+    "AgentRun": {
+      "title": "AgentRun",
+      "description": "An autonomous scheduler agent run execution log",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "summary": { "type": "string" },
+        "actionLog": { "type": "array" },
+        "scheduleBlocks": { "type": "array" },
+        "urgentAlerts": { "type": "array" },
+        "habitNudges": { "type": "array" }
+      },
+      "required": ["id", "timestamp", "summary", "actionLog", "scheduleBlocks", "urgentAlerts", "habitNudges"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "User profile settings including energy profile",
+      "type": "object",
+      "properties": {
+        "energyProfile": { "type": "string" }
+      },
+      "required": ["energyProfile"]
+    }
+  },
+  "firestore": {
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "User's prioritized tasks"
+    },
+    "/habits/{habitId}": {
+      "schema": "Habit",
+      "description": "User's tracked daily habits"
+    },
+    "/scheduleBlocks/{blockId}": {
+      "schema": "ScheduleBlock",
+      "description": "Generated schedule blocks"
+    },
+    "/urgentAlerts/{alertId}": {
+      "schema": "UrgentAlert",
+      "description": "Generated urgent alerts"
+    },
+    "/habitNudges/{nudgeId}": {
+      "schema": "HabitNudge",
+      "description": "Generated habit nudges"
+    },
+    "/agentRuns/{runId}": {
+      "schema": "AgentRun",
+      "description": "Logs of past autonomous agent executions"
+    },
+    "/settings/{documentId}": {
+      "schema": "Settings",
+      "description": "User specific settings and configuration profiles"
+    }
+  }
+}

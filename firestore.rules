@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow read/write for all collections for ease of access in development
+    match /tasks/{taskId} {
+      allow read, write: if true;
+    }
+    match /habits/{habitId} {
+      allow read, write: if true;
+    }
+    match /scheduleBlocks/{blockId} {
+      allow read, write: if true;
+    }
+    match /urgentAlerts/{alertId} {
+      allow read, write: if true;
+    }
+    match /habitNudges/{nudgeId} {
+      allow read, write: if true;
+    }
+    match /agentRuns/{runId} {
+      allow read, write: if true;
+    }
+    match /settings/{documentId} {
+      allow read, write: if true;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pulse - Elite Companion</title>
+    <script>
+      // Suppress benign Vite HMR and WebSocket errors expected in this containerized environment
+      window.addEventListener('unhandledrejection', (event) => {
+        const reasonStr = event.reason ? String(event.reason.message || event.reason) : '';
+        if (
+          reasonStr.toLowerCase().includes('vite') || 
+          reasonStr.toLowerCase().includes('websocket') ||
+          reasonStr.toLowerCase().includes('web socket')
+        ) {
+          event.stopImmediatePropagation();
+          event.preventDefault();
+        }
+      });
+      window.addEventListener('error', (event) => {
+        const msgStr = event.message ? String(event.message) : '';
+        if (
+          msgStr.toLowerCase().includes('vite') || 
+          msgStr.toLowerCase().includes('websocket') ||
+          msgStr.toLowerCase().includes('web socket')
+        ) {
+          event.stopImmediatePropagation();
+          event.preventDefault();
+        }
+      }, true);
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

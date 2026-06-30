@@ -1,0 +1,6 @@
+{
+  "name": "PULSE",
+  "description": "LAST-MINUTE LIFE SAVER",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
